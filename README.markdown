@@ -536,14 +536,20 @@ UIView.animate(withDuration: 1.0, animations: {
   self.myView.removeFromSuperview()
 }
 ```
-
-For single-expression closures where the context is clear, use implicit returns:
+For single-expression closures one one line, use implicit returns:
 
 ```swift
-attendeeList.sort { a, b in
-  a > b
+attendeeList.sort { $0 > $1 }
+```
+
+For single-expression closures with more than one, use explicit returns:
+
+```swift
+attendeeList.sort { a, b in 
+  return a > b
 }
 ```
+
 
 Chained methods using trailing closures should be clear and easy to read in context. Decisions on spacing, line breaks, and when to use named versus anonymous arguments is left to the discretion of the author. Examples:
 
