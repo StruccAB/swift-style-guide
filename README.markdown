@@ -533,6 +533,7 @@ UIView.animate(withDuration: 1.0, animations: {
 }) { f in
   self.myView.removeFromSuperview()
 }
+
 ```
 For single-expression closures one one line, use implicit returns:
 
@@ -540,14 +541,42 @@ For single-expression closures one one line, use implicit returns:
 attendeeList.sort { $0 > $1 }
 ```
 
-For single-expression closures with more than one, use explicit returns:
+For single-expression closures with more than one line, use explicit returns:
 
 ```swift
-attendeeList.sort { a, b in 
+attendeeList.map { a, b in 
+  let sum = a + b
+  return sum
+}
+```
+
+For closures with more than one line, use named parameters
+**Preferred**:
+
+```swift
+attendeeList.sort { a, b in
   return a > b
 }
 ```
 
+**Not Preferred**:
+```swift
+attendeeList.sort {
+  return $0 > $1
+}
+```
+
+If possible avoid more than one line if the expression is easy to evaluate
+**Preferred**:
+```swift
+attendeeList.sort { $0 > $1 }
+```
+**Not Preferred**:
+```swift
+attendeeList.sort { a,b in
+  return a > b
+}
+```
 
 Chained methods using trailing closures should be clear and easy to read in context. Decisions on spacing, line breaks, and when to use named versus anonymous arguments is left to the discretion of the author. Examples:
 
