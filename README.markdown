@@ -1,3 +1,4 @@
+
 # The Official raywenderlich.com Swift Style Guide.
 ### Updated for Swift 4.2
 
@@ -44,6 +45,7 @@ Our overarching goals are clarity, consistency and brevity, in that order.
   * [Ternary Operator](#ternary-operator)
 * [Golden Path](#golden-path)
   * [Failing Guards](#failing-guards)
+  * [Defensive Techniques](#Defensive-techniques)
 * [Semicolons](#semicolons)
 * [Parentheses](#parentheses)
 * [Multi-line String Literals](#multi-line-string-literals)
@@ -971,6 +973,40 @@ if let number1 = number1 {
 ### Failing Guards
 
 Guard statements are required to exit in some way. Generally, this should be simple one line statement such as `return`, `throw`, `break`, `continue`, and `fatalError()`. Large code blocks should be avoided. If cleanup code is required for multiple exit points, consider using a `defer` block to avoid cleanup code duplication.
+
+### Defensive Techniques
+
+Use `sweetAssertionFailure` to catch errors / issues as early as possible.
+**Preferred**:
+```swift
+guard let number1 = number1 else {
+    sweetAssertionFailure("Number should not be nil")
+}
+// do something with number
+```
+
+**Not Preferred**:
+```swift
+guard let number1 = number1 else {
+    return
+}
+// do something with number
+```
+
+Use `safe` for array indexing without crashes.
+**Preferred**:
+```swift
+guard let number1 = array[safe: 0] else {
+    sweetAssertionFailure("Number should not be nil")
+}
+// do something with number
+```
+
+**Not Preferred**:
+```swift
+let number1 = array[0]
+// do something with number
+```
 
 ## Semicolons
 
