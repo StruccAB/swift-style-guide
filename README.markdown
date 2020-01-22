@@ -981,6 +981,7 @@ Use `sweetAssertionFailure` to catch errors / issues as early as possible.
 ```swift
 guard let number1 = number1 else {
     sweetAssertionFailure("Number should not be nil")
+    return
 }
 // do something with number
 ```
@@ -998,6 +999,7 @@ Use `safe` for array indexing without crashes.
 ```swift
 guard let number1 = array[safe: 0] else {
     sweetAssertionFailure("Number should not be nil")
+    return
 }
 // do something with number
 ```
