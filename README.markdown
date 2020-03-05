@@ -535,13 +535,13 @@ UIView.animate(withDuration: 1.0, animations: {
 }
 
 ```
-For single-expression closures one one line, use implicit returns:
+For single-expression closures one statement, use implicit returns:
 
 ```swift
 attendeeList.sort { $0 > $1 }
 ```
 
-For single-expression closures with more than one line, use explicit returns:
+For closures with more than one statement, use explicit returns:
 
 ```swift
 attendeeList.map { a, b in 
@@ -550,19 +550,21 @@ attendeeList.map { a, b in
 }
 ```
 
-For closures with more than one line, use named parameters
+For closures with more than one statement, use named parameters
 **Preferred**:
 
 ```swift
 attendeeList.sort { a, b in
-  return a > b
+  let sum = a + b
+  return sum > b
 }
 ```
 
 **Not Preferred**:
 ```swift
 attendeeList.sort {
-  return $0 > $1
+  let sum = $0 + $1
+  return sum > $1
 }
 ```
 
